@@ -1271,7 +1271,7 @@ class DcitionaryOfGua(object):
 "“利见大人”是因为九五与六二皆居中守正。“大牲”是指以牛为牺牲。",
 "萃卦下坤上兑，兑为口，有享用之意，坤为牛，合之则为“用大牲”。",
 "③萃卦由小过卦（第六十二卦）所变。萃卦的覆卦为下一卦升卦。",
-"即小过卦的九三与六五换位，成为萃卦（H）的九五，如此则可合乎“利见大人”与“利有攸往”两项条件。",
+"即小过卦的九三与六五换位，成为萃卦的九五，如此则可合乎“利见大人”与“利有攸往”两项条件。",
 "〈45-2〉",
 "《彖》曰：萃，聚也。顺以说，刚中而应，故聚也。王假有庙，致孝享也。",
 "利见大人亨，聚以正也。用大牲吉，利有攸往，顺天命也。观其所聚，而天地万物之情可见矣。",
@@ -8004,7 +8004,7 @@ class DcitionaryOfGua(object):
 class DictionaryOfProcess():
     dictionary_Yao = {1:'First',2:'Second',3:'Third',4:'Fourth',5:'Fifth',6:'Sixth'}
     dictionary_LaoShao_YinYang = {6:'negative',8:'negative',7:'positive',9:'positive'}
-    dictionary_LaoShao_Change = {6:'Changing',9:'Changed',7:'Stable',8:'Stable'}
+    dictionary_LaoShao_Change = {6:'Changed',9:'Changed',7:'Stable',8:'Stable'}
 
 
 class AlgorithmOfDivination(object):
@@ -8043,28 +8043,28 @@ class AlgorithmOfDivination(object):
         count = sum(bianyao)
         if count == 0:
             print("None liner is changing.\n")
-            print("Please refer to the Main symbol's self meaning.\n")
+            print("Please refer to main symbol's self meaning.\n")
         elif count == 1:
             PositionOfPositive = bianyao.index(1)+1
             print("Only one liner is changing.\n")
-            print("Please refer to the meaning of the Main symbol's the {} floor changing line.\n".format(DictionaryOfProcess.dictionary_Yao[PositionOfPositive]))
+            print("Please refer to the meaning of main symbol's the {} floor changing line.\n".format(DictionaryOfProcess.dictionary_Yao[PositionOfPositive]))
         elif count == 2:
             PositionOfPositive = [i1+1 for i1 in range(6) if bianyao[i1]==1]
             print("Two liners are changing.\n")
-            print("Please refer to the meaning of the Main symbol's changing linears whitch are the {} and {} floors.\n".format(DictionaryOfProcess.dictionary_Yao[PositionOfPositive[0]],DictionaryOfProcess.dictionary_Yao[PositionOfPositive[1]]))
-            print("And the {} floor of  The main is primary.\n".format(DictionaryOfProcess.dictionary_Yao[PositionOfPositive[1]]))
+            print("Please refer to the meaning of main symbol's changing linears whitch are the {} and {} floors.\n".format(DictionaryOfProcess.dictionary_Yao[PositionOfPositive[0]],DictionaryOfProcess.dictionary_Yao[PositionOfPositive[1]]))
+            print("And the {} floor of  The main.\n".format(DictionaryOfProcess.dictionary_Yao[PositionOfPositive[1]]))
         elif count == 3:
             print("Three liners are changing.\n")
-            print("Please refer to the Main symbol and the Ohter smybol's self meaning, and the Main symbol is primary.\n")
+            print("Please refer to main symbol and the ohter smybol's mains,and main symbol is main.\n")
         elif count == 4:
             PositionOfNegative = [i0+1 for i0 in range(6) if bianyao[i0]==0]
             print("Four liners are changing.\n")
-            print("Please refer to the meaning of the other symbol's stable linears whitch are the {} and {} floor).\n".format(DictionaryOfProcess.dictionary_Yao[PositionOfNegative[0]],DictionaryOfProcess.dictionary_Yao[PositionOfNegative[1]]))
-            print("And the {} floor of The main is primary.\n".format(DictionaryOfProcess.dictionary_Yao[PositionOfNegative[0]]))
+            print("Please refer to the meaning of the other symbol's non-changing linears whitch are the {} and {} floor).\n".format(DictionaryOfProcess.dictionary_Yao[PositionOfNegative[0]],DictionaryOfProcess.dictionary_Yao[PositionOfNegative[1]]))
+            print("And the {} floor of The main.\n".format(DictionaryOfProcess.dictionary_Yao[PositionOfNegative[0]]))
         elif count == 5:
             PositionOfNegative = bianyao.index(0)+1
             print("Five liners are changing.\n")
-            print("Please refer to the meaning of the Other symbol's the {} floor stable line.\n".format(DictionaryOfProcess.dictionary_Yao[int(PositionOfNegative)]))
+            print("Please refer to the meaning of the other symbol's the {} floor non-changing line.\n".format(DictionaryOfProcess.dictionary_Yao[int(PositionOfNegative)]))
         elif count == 6:
             print("Six liners are changing.\n")
             #Qian and Kun are special 
