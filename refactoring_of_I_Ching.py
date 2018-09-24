@@ -4,38 +4,43 @@ class AlgorithmOfDivination(object):
     
     def Preprocessing_BranchOfGua(chaos,n,zhugua,zhigua,bianyao):
         "变卦时候预处理"
-        f=open('zhan.txt','a+',encoding='UTF-8')
+        f=open('zhanbu@terminalfile_alpha.txt','a+',encoding='UTF-8')
         Yao = n + 1
         zhugua[n] = chaos / 4
+        print("\n",file=f)
         print("The {} floor is {} {} line.\n".format(
             DictionaryOfProcess.dictionary_Yao[Yao],DictionaryOfProcess.dictionary_LaoShao_YinYang[zhugua[n]],DictionaryOfProcess.dictionary_LaoShao_Change[zhugua[n]])
               ,file=f)
         if zhugua[n] == 6:
-                zhigua[n] = 1
-                zhugua[n] = 0
-                bianyao[n] = 1
                 '少阴'
+                zhigua[n] = 1
+                zhugua[n] = 0
+                bianyao[n] = 1
+                
         elif zhugua[n] == 7:
+                '少阳'
                 zhigua[n] = 1
                 zhugua[n] = 1
                 bianyao[n] = 0
-                '少阳'
+                
         elif zhugua[n] == 8:
+                '老阴'
                 zhigua[n] = 0
                 zhugua[n] = 0
                 bianyao[n] = 0
-                '老阴'
+                
         elif zhugua[n] == 9:
+                '老阳'
                 zhigua[n] = 0
                 zhugua[n] = 1
                 bianyao[n] = 1
-                '老阳'
+                
         f.close()
         return zhugua,zhigua,bianyao,n
 
     def InterpretAlgorithmOfZhuXi(zhugua,zhigua,bianyao):
         "解卦步骤"
-        f=open('zhan.txt','a+',encoding='UTF-8')
+        f=open('zhanbu@terminalfile_alpha.txt','a+',encoding='UTF-8')
         print('*'*100,file=f)
         count = sum(bianyao)
         if count == 0:
@@ -88,7 +93,7 @@ class AlgorithmOfDivination(object):
         f.close()
 
     def ResultOfGua(zhugua,zhigua,bianyao):
-        f=open('zhan.txt','a+',encoding='UTF-8')
+        f=open('zhanbu@terminalfile_alpha.txt','a+',encoding='UTF-8')
         str_zhugua = ''.join([str(i) for i in zhugua])
         str_zhigua = ''.join([str(j) for j in zhigua])
         print("main symbol is {} , the other symbol is {}".format(
@@ -8188,6 +8193,6 @@ class setup(object):
     import time,os,sys
     NewName="YiNote-"+time.strftime("%Y%m%d%H%M%S %w-%Z",time.localtime())+".txt"
     AncientMeasurement.AlgorithmOfAncientMeasurement()
-    os.rename('zhan.txt',NewName)
+    os.rename('zhanbu@terminalfile_alpha.txt',NewName)
 #setup
 setup()
