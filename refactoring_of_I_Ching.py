@@ -4,13 +4,15 @@ class AlgorithmOfDivination(object):
     
     def Preprocessing_BranchOfGua(chaos,n,zhugua,zhigua,bianyao):
         "变卦时候预处理"
-        f=open('zhanbu@terminalfile_alpha.txt','a+',encoding='UTF-8')
+       
         Yao = n + 1
         zhugua[n] = chaos / 4
+        f=open('zhanbu@terminalfile_alpha.txt','a+',encoding='UTF-8')
         print("\n",file=f)
         print("The {} floor is {} {} line.\n".format(
             DictionaryOfProcess.dictionary_Yao[Yao],DictionaryOfProcess.dictionary_LaoShao_YinYang[zhugua[n]],DictionaryOfProcess.dictionary_LaoShao_Change[zhugua[n]])
               ,file=f)
+        f.close()
         if zhugua[n] == 6:
                 '少阴'
                 zhigua[n] = 1
@@ -35,74 +37,76 @@ class AlgorithmOfDivination(object):
                 zhugua[n] = 1
                 bianyao[n] = 1
                 
-        f.close()
         return zhugua,zhigua,bianyao,n
 
     def InterpretAlgorithmOfZhuXi(zhugua,zhigua,bianyao):
         "解卦步骤"
+        count = sum(bianyao)
         f=open('zhanbu@terminalfile_alpha.txt','a+',encoding='UTF-8')
         print('*'*100,file=f)
-        count = sum(bianyao)
+        
         if count == 0:
-            print("None liner is changing.\n",file=f)
-            print("Please refer to main symbol's self meaning.\n",file=f)
+            print("None liner is changed.\n",file=f)
+            print("Please refer to The Main Symbol's self means.\n",file=f)
         elif count == 1:
             PositionOfPositive = bianyao.index(1)+1
-            print("Only one liner is changing.\n",file=f)
-            print("Please refer to the meaning of main symbol's the {} floor changing line.\n".format(
+            print("Only one liner is changed.\n",file=f)
+            print("Please refer to the meaning of The Main Symbol's the {} floor changed line.\n".format(
                 DictionaryOfProcess.dictionary_Yao[PositionOfPositive])
                   ,file=f)
         elif count == 2:
             PositionOfPositive = [i1+1 for i1 in range(6) if bianyao[i1]==1]
-            print("Two liners are changing.\n",file=f)
-            print("Please refer to the meaning of main symbol's changing linears whitch are the {} and {} floors.\n".format(
+            print("Two liners are changed.\n",file=f)
+            print("Please refer to the meaning of The Main Symbol's changed lines, whitch are the {} and {} floors.\n".format(
                 DictionaryOfProcess.dictionary_Yao[PositionOfPositive[0]],DictionaryOfProcess.dictionary_Yao[PositionOfPositive[1]])
                   ,file=f)
-            print("And the {} floor of  The main.\n".format(
+            print("But the {} floor is more important.\n".format(
                 DictionaryOfProcess.dictionary_Yao[PositionOfPositive[1]])
                   ,file=f)
         elif count == 3:
-            print("Three liners are changing.\n",file=f)
-            print("Please refer to main symbol and the ohter smybol's mains,and main symbol is main.\n",file=f)
+            print("Three liners are changed.\n",file=f)
+            print("Please refer to The Main Symbol and the ohter smybol's means.\n But The Main Symbol is more important.\n",file=f)
         elif count == 4:
             PositionOfNegative = [i0+1 for i0 in range(6) if bianyao[i0]==0]
-            print("Four liners are changing.\n",file=f)
-            print("Please refer to the meaning of the other symbol's non-changing linears whitch are the {} and {} floor).\n".format(
+            print("Four liners are changed.\n",file=f)
+            print("Please refer to the meaning of The Other Symbol's stable lines, whitch are the {} and {} floor).\n".format(
                 DictionaryOfProcess.dictionary_Yao[PositionOfNegative[0]],DictionaryOfProcess.dictionary_Yao[PositionOfNegative[1]])
                   ,file=f)
-            print("And the {} floor of The main.\n".format(
+            print("But the {} floor is more important.\n".format(
                 DictionaryOfProcess.dictionary_Yao[PositionOfNegative[0]])
                   ,file=f)
         elif count == 5:
             PositionOfNegative = bianyao.index(0)+1
-            print("Five liners are changing.\n",file=f)
-            print("Please refer to the meaning of the other symbol's the {} floor non-changing line.\n".format(
+            print("Five liners are changed.\n",file=f)
+            print("Please refer to the meaning of The Other Symbol's the {} floor stable line.\n".format(
                 DictionaryOfProcess.dictionary_Yao[int(PositionOfNegative)])
                   ,file=f)
         elif count == 6:
-            print("Six liners are changing.\n",file=f)
+            print("Six liners are changed.\n",file=f)
             #Qian and Kun are special 
             if sum(zhugua) == 6:
-                print("Please refer to Qian's extreme liner which beyond the sixth.\n",file=f)
+                print("Please refer to Qian's extreme liner, which beyond the sixth.\n",file=f)
             elif sum(zhugua) == 0:
-                print("Please refer to Kun's extreme liner which beyond the sixth.\n",file=f)
+                print("Please refer to Kun's extreme liner, which beyond the sixth.\n",file=f)
             else:
-                print("Please refer to the other symbol's self mains.\n",file=f)
+                print("Please refer to The Other Symbol's self means.\n",file=f)
         else:
-            print("Work wrong now!",file=f)
+            print("A rare mistake get out now!")
         f.close()
 
     def ResultOfGua(zhugua,zhigua,bianyao):
-        f=open('zhanbu@terminalfile_alpha.txt','a+',encoding='UTF-8')
+        
         str_zhugua = ''.join([str(i) for i in zhugua])
         str_zhigua = ''.join([str(j) for j in zhigua])
-        print("main symbol is {} , the other symbol is {}".format(
-            DcitionaryOfGua.dictionary_List2GuaNumber[str_zhugua],DcitionaryOfGua.dictionary_List2GuaNumber[str_zhigua])
-              ,file=f)
         ConclusionOfZhugua = DcitionaryOfGua.dictionary_GuaNumber2FuPeirong[DcitionaryOfGua.dictionary_List2GuaNumber[str_zhugua]]
         ConclusionOfZhigua = DcitionaryOfGua.dictionary_GuaNumber2FuPeirong[DcitionaryOfGua.dictionary_List2GuaNumber[str_zhigua]]
+        f=open('zhanbu@terminalfile_alpha.txt','a+',encoding='UTF-8')
+        print("The Main Symbol is {} , The Other Symbol is {}".format(
+            DcitionaryOfGua.dictionary_List2GuaNumber[str_zhugua],DcitionaryOfGua.dictionary_List2GuaNumber[str_zhigua])
+              ,file=f)
         print('*'*100,file=f)
-        print("The main symbol is: \n",file=f)
+        print("The Main Symbol is: \n",file=f)
+        print(*(DcitionaryOfGua.dictionary_PictureOfYao[k] for k in reversed(zhugua)),sep = '\n',file=f)
         print(*ConclusionOfZhugua,sep = '\n',file=f)
         isSpecial=sum(bianyao)
         #Qian and Kun are special 
@@ -111,6 +115,7 @@ class AlgorithmOfDivination(object):
                 pass
             else:
                 print("The other symbol is: \n",file=f)
+                print(*(DcitionaryOfGua.dictionary_PictureOfYao[k] for k in reversed(zhigua)),sep = '\n',file=f)
                 print(*ConclusionOfZhigua,sep = '\n',file=f)
 
         f.close()
@@ -124,7 +129,9 @@ class AncientMeasurement(AlgorithmOfDivination):
     '''太卜之遗法·揲筮成卦古筮法'''
 
     def AlgorithmOfAncientMeasurement():
+
         import random,os
+
         zhugua = [0,0,0,0,0,0]
         zhigua = [0,0,0,0,0,0]
         bianyao = [0,0,0,0,0,0]
@@ -169,7 +176,7 @@ class AncientMeasurement(AlgorithmOfDivination):
 
         AlgorithmOfDivination.InterpretAlgorithmOfZhuXi(zhugua,zhigua,bianyao)
         AlgorithmOfDivination.ResultOfGua(zhugua,zhigua,bianyao)
-        os.system('pause')
+
         return zhugua,zhigua,bianyao
 
 
@@ -180,6 +187,7 @@ class AncientMeasurement(AlgorithmOfDivination):
 
 
 class DcitionaryOfGua(object):
+    dictionary_PictureOfYao={0:'    - -',1:'    ---'}
     dictionary_List2GuaNumber = {'111111':1,'000000':2,'100010':3,'010001':4,'111010':5,
                          '010111':6,'010000':7,'000010':8,'111011':9,'110111':10,
                          '111000':11,'000111':12,'101111':13,'111101':14,'001000':15,
@@ -8184,14 +8192,16 @@ class DcitionaryOfGua(object):
 
 class DictionaryOfProcess(object):
     dictionary_Yao = {1:'First',2:'Second',3:'Third',4:'Fourth',5:'Fifth',6:'Sixth'}
-    dictionary_LaoShao_YinYang = {6:'negative',8:'negative',7:'positive',9:'positive'}
+    dictionary_LaoShao_YinYang = {6:'Negative',8:'Negative',7:'Positive',9:'Positive'}
     dictionary_LaoShao_Change = {6:'Changed',9:'Changed',7:'Stable',8:'Stable'}
+   
 
 
 
 class setup(object):
     import time,os,sys
-    NewName="YiNote-"+time.strftime("%Y%m%d%H%M%S %w-%Z",time.localtime())+".txt"
+    NewName="I-ChingNote-"+time.strftime("%Y%m%d%H%M%S %w-%Z",time.localtime())+".txt"
+    print("Think about your problem!\n")
     AncientMeasurement.AlgorithmOfAncientMeasurement()
     os.rename('zhanbu@terminalfile_alpha.txt',NewName)
 #setup
