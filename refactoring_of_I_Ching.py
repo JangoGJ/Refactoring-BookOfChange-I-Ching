@@ -1,9 +1,80 @@
 #encoding:utf-8
+class Support(object):
+    '''Additional Option
+    (1) sent email.
+    (2) rename file.'''
+
+    import time
+    OldName='zhanbu@terminalfile_alpha.txt'
+    NewName="I-ChingNote-"+time.strftime("%Y%m%d%H%M%S %w-%Z",time.localtime())+".txt"   
+
+
+    def SentEmail():
+        "Sent Email"
+
+        import smtplib
+        from email.header import Header
+        from email.mime.text import MIMEText
+        from email.mime.multipart import MIMEMultipart
+
+        # your email setting.
+        sender = 'XXXXX@outlook.com'
+        receiver=['XXXXX@outlook.com','XXXXX@qq.com']
+        smtp_server = 'smtp.outlook.com'
+        smtp_port = 587
+        username = 'XXXXX@outlook.com'
+        password = 'XXXXX'
+        mail_title = 'This is your YiNote.'
+         
+        # make a email with attachment
+        message = MIMEMultipart()
+        message['From'] =sender
+        message['To'] = str(';'.join(receiver))
+        message['Subject'] = Header(mail_title, 'utf-8')
+        
+        
+         
+        # edit straight matter
+        data='This is the answer you wanted...\n'
+        with open(Support.NewName,encoding='utf-8') as txtword:
+            data=data+''.join(txtword.readlines())
+            message.attach(MIMEText(data, 'plain', 'utf-8'))
+        txtword.close()
+        # edit attachment(.txt)
+        att1 = MIMEText(open(Support.NewName, 'rb').read(), 'base64', 'utf-8')
+        att1["Content-Type"] = 'application/octet-stream'
+        # setting sent file's name
+        att1_Content_Disposition=str('attachment;filename='+'YiNote.txt')
+        att1["Content-Disposition"] =att1_Content_Disposition
+        message.attach(att1)
+         
+        
+        # login and sent email.
+        smtpObj=smtplib.SMTP(smtp_server, smtp_port)
+        smtpObj.starttls()
+        try:
+            smtpObj.login(username, password)
+            smtpObj.sendmail(sender, receiver, message.as_string())
+        except:
+            print ("Error: Fail to send email.")
+        else:
+            smtpObj.quit()
+
+
+
+
+    def DayNameFile():
+        "rename file with date"
+        import os
+        os.rename(Support.OldName,Support.NewName)
+
+        
+
 class AlgorithmOfDivination(object):
-    '''占卜算法'''
+    '''Algorithm of divination. The sum class.'''
     
     def Preprocessing_BranchOfGua(chaos,n,zhugua,zhigua,bianyao):
-        "变卦时候预处理"
+        "Preprocessing algorithm when Gua is changing."
        
         Yao = n + 1
         zhugua[n] = chaos / 4
@@ -14,25 +85,25 @@ class AlgorithmOfDivination(object):
               ,file=f)
         f.close()
         if zhugua[n] == 6:
-                '少阴'
+                'Little Yin'
                 zhigua[n] = 1
                 zhugua[n] = 0
                 bianyao[n] = 1
                 
         elif zhugua[n] == 7:
-                '少阳'
+                'Little Yang'
                 zhigua[n] = 1
                 zhugua[n] = 1
                 bianyao[n] = 0
                 
         elif zhugua[n] == 8:
-                '老阴'
+                'Strong Yin'
                 zhigua[n] = 0
                 zhugua[n] = 0
                 bianyao[n] = 0
                 
         elif zhugua[n] == 9:
-                '老阳'
+                'Strong Yang'
                 zhigua[n] = 0
                 zhugua[n] = 1
                 bianyao[n] = 1
@@ -40,7 +111,7 @@ class AlgorithmOfDivination(object):
         return zhugua,zhigua,bianyao,n
 
     def InterpretAlgorithmOfZhuXi(zhugua,zhigua,bianyao):
-        "解卦步骤"
+        "ZhuXi Interpret Algorithm"
         count = sum(bianyao)
         f=open('zhanbu@terminalfile_alpha.txt','a+',encoding='UTF-8')
         print('*'*100,file=f)
@@ -95,7 +166,7 @@ class AlgorithmOfDivination(object):
         f.close()
 
     def ResultOfGua(zhugua,zhigua,bianyao):
-        
+        "Print Gua"
         str_zhugua = ''.join([str(i) for i in zhugua])
         str_zhigua = ''.join([str(j) for j in zhigua])
         ConclusionOfZhugua = DcitionaryOfGua.dictionary_GuaNumber2FuPeirong[DcitionaryOfGua.dictionary_List2GuaNumber[str_zhugua]]
@@ -8199,10 +8270,9 @@ class DictionaryOfProcess(object):
 
 
 class setup(object):
-    import time,os,sys
-    NewName="I-ChingNote-"+time.strftime("%Y%m%d%H%M%S %w-%Z",time.localtime())+".txt"
     print("Think about your problem!\n")
     AncientMeasurement.AlgorithmOfAncientMeasurement()
-    os.rename('zhanbu@terminalfile_alpha.txt',NewName)
-#setup
+    Support.DayNameFile()
+    Support.SentEmail()
+##setup
 setup()
