@@ -1,5 +1,6 @@
 # Refactoring-BookOfChange-I-Ching
-Refactoring the core code with Python
+Refactoring the core code with 
+[![Python](https://img.shields.io/badge/Python-3%2B-blue.svg)](https://www.python.org)
 
 
 I have some time to refactor my old code, I particularly grateful to my friends for their timely help..<br>
